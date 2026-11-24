@@ -79,6 +79,14 @@ allprojects {
         options.compilerArgs << '-Xlint:unchecked' << '-Xlint:deprecation'
     }
 
+    tasks.withType(Copy).configureEach {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
+    tasks.withType(Jar).configureEach {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
     compileJava.dependsOn clean
 
     java {
