@@ -10,6 +10,8 @@
 
 Break wild grass in survival to discover the legendary four-leaf clover, then right-click anywhere to roll the dice of destiny!
 
+![Banner](https://i.imgur.com/HxtnVuM.png)
+
 ---
 
 ## ✨ Features
