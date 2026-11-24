@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lucky_clover_reborn:item/lucky_clover"
+  }
+}

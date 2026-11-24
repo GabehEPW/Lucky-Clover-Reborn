@@ -1,0 +1,34 @@
+modLoader = "javafml"
+loaderVersion = "[46, )"
+issueTrackerURL = "https://github.com/GabehEPW/Lucky-Clover-Reborn/issues"
+license = "MIT"
+
+[[mods]]
+modId = "lucky_clover_reborn"
+version = "1.20.1-1.0.0"
+displayName = "Lucky Clover Reborn"
+
+authors = "GabehEPW"
+credits = "Original concept by konwboj (Magic Clover)"
+
+displayURL = "https://github.com/GabehEPW/Lucky-Clover-Reborn"
+description = '''
+The classic Lucky Clover mod reimagined for modern Minecraft!
+Break grass or ferns in survival to find rare four-leaf clovers, then right-click anywhere to test your luck!
+Rolls random items from vanilla and all installed mods, with classic surprise hazard events.
+'''
+logoFile = "icon.png"
+
+[[dependencies."lucky_clover_reborn"]]
+modId = "forge"
+mandatory = true
+versionRange = "[46, )"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies."lucky_clover_reborn"]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20, 1.20.2)"
+ordering = "NONE"
+side = "BOTH"
