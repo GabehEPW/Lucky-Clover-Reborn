@@ -130,9 +130,8 @@ public class LuckyCloverItem extends Item {
     }
 
     private void spawnLuckyEffects(ServerWorld world, Vec3d pos) {
-        world.playSound(null, pos.x, pos.y, pos.z, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 0.8f, 1.2f);
-        world.spawnParticles(ParticleTypes.HAPPY_VILLAGER, pos.x, pos.y, pos.z, 25, 0.4, 0.4, 0.4, 0.1);
-        world.spawnParticles(ParticleTypes.ENCHANT, pos.x, pos.y + 0.3, pos.z, 30, 0.5, 0.5, 0.5, 0.2);
+        world.playSound(null, pos.x, pos.y, pos.z, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 0.35f, 1.3f);
+        world.spawnParticles(ParticleTypes.HAPPY_VILLAGER, pos.x, pos.y + 0.1, pos.z, 4, 0.2, 0.2, 0.2, 0.02);
     }
 
     /**
