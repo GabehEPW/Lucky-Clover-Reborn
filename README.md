@@ -26,8 +26,17 @@ Break wild grass in survival to discover the legendary four-leaf clover, then ri
   - 🧟 **Armed Zombie Horde**: Spawns armored zombies equipped with iron swords and helmets.
   - 💀 **Sniper Skeleton**: Spawns a skeleton equipped with a Power II enchanted bow.
   - 💣 **Primed TNT**: Drops an activated TNT block with a short 2.5-second fuse ticking at your feet!
-- 📦 **Zero Heavy Dependencies**: Pure, native support for **Forge**, **NeoForge**, and **Fabric** (only requires standard Fabric API). No companion frameworks like Architectury API required!
+- 📦 **Zero Heavy Dependencies**: Pure, native support for **NeoForge** and **Fabric** (only requires standard Fabric API). No companion frameworks like Architectury API required!
 - 🎨 **Authentic Pixel Art**: Features the iconic 16x16 emerald sprite from the classic era with full enchanted glint.
+
+---
+
+## 📦 Versions
+
+| Minecraft | Mod Version | Loaders | Java | Branch |
+| :--- | :--- | :--- | :--- | :--- |
+| **1.21.1** | `1.1.0` | NeoForge, Fabric | Java 21 | [`main`](https://github.com/GabehEPW/Lucky-Clover-Reborn/tree/main) |
+| **1.20.1** | `1.0.0` | Forge, Fabric | Java 17 | [`1.20.1`](https://github.com/GabehEPW/Lucky-Clover-Reborn/tree/1.20.1) |
 
 ---
 
