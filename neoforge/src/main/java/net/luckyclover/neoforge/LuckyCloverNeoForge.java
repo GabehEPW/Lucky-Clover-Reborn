@@ -1,4 +1,4 @@
-package net.luckyclover.forge;
+package net.luckyclover.neoforge;
 
 import net.luckyclover.item.LuckyCloverItem;
 import net.minecraft.item.Item;
@@ -8,44 +8,35 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Rarity;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
-@Mod(LuckyCloverForge.MOD_ID)
-public final class LuckyCloverForge {
+@Mod(LuckyCloverNeoForge.MOD_ID)
+public final class LuckyCloverNeoForge {
     public static final String MOD_ID = "lucky_clover_reborn";
 
-    // Native Forge / NeoForge registries (Zero external dependencies)
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(RegistryKeys.ITEM, MOD_ID);
     public static final DeferredRegister<ItemGroup> CREATIVE_TABS = DeferredRegister.create(RegistryKeys.ITEM_GROUP, MOD_ID);
 
-    // The Lucky Clover
-    public static final RegistryObject<Item> LUCKY_CLOVER = ITEMS.register("lucky_clover",
+    public static final DeferredHolder<Item, Item> LUCKY_CLOVER = ITEMS.register("lucky_clover",
             () -> new LuckyCloverItem(new Item.Settings().rarity(Rarity.RARE)));
 
-    // Dedicated Creative Mode Tab
-    public static final RegistryObject<ItemGroup> CLOVER_TAB = CREATIVE_TABS.register("clovers",
+    public static final DeferredHolder<ItemGroup, ItemGroup> CLOVER_TAB = CREATIVE_TABS.register("clovers",
             () -> ItemGroup.builder()
                     .displayName(Text.translatable("itemGroup." + MOD_ID + ".clovers"))
                     .icon(() -> new ItemStack(LUCKY_CLOVER.get()))
-                    .entries((displayContext, entries) -> {
-                        entries.add(new ItemStack(LUCKY_CLOVER.get()));
-                    })
+                    .entries((displayContext, entries) -> entries.add(new ItemStack(LUCKY_CLOVER.get())))
                     .build()
     );
 
-    public LuckyCloverForge() {
-        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+    public LuckyCloverNeoForge(IEventBus modBus, ModContainer modContainer) {
         // Register native TOML configuration in config/lucky_clover_reborn-common.toml
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, LuckyCloverConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, LuckyCloverConfig.SPEC);
 
         // Link configuration values directly to the item logic
         LuckyCloverItem.badLuckChanceSupplier = LuckyCloverConfig.BAD_LUCK_CHANCE::get;
@@ -59,11 +50,9 @@ public final class LuckyCloverForge {
         LuckyCloverItem.enableTntSupplier = LuckyCloverConfig.ENABLE_PRIMED_TNT::get;
         LuckyCloverItem.tntFuseSupplier = LuckyCloverConfig.TNT_FUSE_TICKS::get;
 
-        // Register items and creative tabs
         ITEMS.register(modBus);
         CREATIVE_TABS.register(modBus);
 
-        // Also add to vanilla Tools and Ingredients creative tabs
         modBus.addListener(this::addCreative);
     }
 

@@ -28,13 +28,13 @@ public final class LuckyCloverFabric implements ModInitializer {
 
     public static final RegistryKey<ItemGroup> ITEM_GROUP = RegistryKey.of(
             RegistryKeys.ITEM_GROUP,
-            new Identifier(MOD_ID, "general")
+            Identifier.of(MOD_ID, "general")
     );
 
     @Override
     public void onInitialize() {
         // Register item
-        Registry.register(Registries.ITEM, new Identifier(MOD_ID, "lucky_clover"), LUCKY_CLOVER);
+        Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "lucky_clover"), LUCKY_CLOVER);
 
         // Register custom creative tab
         Registry.register(Registries.ITEM_GROUP, ITEM_GROUP, FabricItemGroup.builder()
@@ -54,7 +54,7 @@ public final class LuckyCloverFabric implements ModInitializer {
                 return;
             }
 
-            if (state.isOf(Blocks.GRASS) || state.isOf(Blocks.TALL_GRASS)
+            if (state.isOf(Blocks.SHORT_GRASS) || state.isOf(Blocks.TALL_GRASS)
                     || state.isOf(Blocks.FERN) || state.isOf(Blocks.LARGE_FERN)) {
                 // 1 in 200 chance (0.005)
                 if (world.getRandom().nextFloat() < 0.005f) {

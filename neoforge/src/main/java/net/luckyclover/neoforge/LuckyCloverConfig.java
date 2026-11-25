@@ -1,27 +1,27 @@
-package net.luckyclover.forge;
+package net.luckyclover.neoforge;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
 
 public class LuckyCloverConfig {
-    public static final ForgeConfigSpec SPEC;
-    public static final ForgeConfigSpec.DoubleValue GRASS_DROP_CHANCE;
-    public static final ForgeConfigSpec.DoubleValue BAD_LUCK_CHANCE;
-    public static final ForgeConfigSpec.IntValue MAX_STACK_COUNT;
-    public static final ForgeConfigSpec.ConfigValue<List<? extends String>> ITEM_BLACKLIST;
+    public static final ModConfigSpec SPEC;
+    public static final ModConfigSpec.DoubleValue GRASS_DROP_CHANCE;
+    public static final ModConfigSpec.DoubleValue BAD_LUCK_CHANCE;
+    public static final ModConfigSpec.IntValue MAX_STACK_COUNT;
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> ITEM_BLACKLIST;
 
     // Hazards
-    public static final ForgeConfigSpec.BooleanValue ENABLE_LIGHTNING;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_CREEPER;
-    public static final ForgeConfigSpec.DoubleValue CREEPER_CHARGED_CHANCE;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_ZOMBIE_HORDE;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_SNIPER_SKELETON;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_PRIMED_TNT;
-    public static final ForgeConfigSpec.IntValue TNT_FUSE_TICKS;
+    public static final ModConfigSpec.BooleanValue ENABLE_LIGHTNING;
+    public static final ModConfigSpec.BooleanValue ENABLE_CREEPER;
+    public static final ModConfigSpec.DoubleValue CREEPER_CHARGED_CHANCE;
+    public static final ModConfigSpec.BooleanValue ENABLE_ZOMBIE_HORDE;
+    public static final ModConfigSpec.BooleanValue ENABLE_SNIPER_SKELETON;
+    public static final ModConfigSpec.BooleanValue ENABLE_PRIMED_TNT;
+    public static final ModConfigSpec.IntValue TNT_FUSE_TICKS;
 
     static {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
 
         builder.comment("General settings for Lucky Clover Reborn").push("general");
         GRASS_DROP_CHANCE = builder
@@ -47,6 +47,7 @@ public class LuckyCloverConfig {
                 .defineListAllowEmpty(
                         "itemBlacklist",
                         List.of("minecraft:bedrock", "minecraft:barrier", "minecraft:structure_void", "minecraft:command_block"),
+                        () -> "",
                         obj -> obj instanceof String
                 );
         builder.pop();

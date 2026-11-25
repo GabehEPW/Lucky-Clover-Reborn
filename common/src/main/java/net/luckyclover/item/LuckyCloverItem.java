@@ -16,6 +16,7 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -249,8 +250,9 @@ public class LuckyCloverItem extends Item {
                 if (skeleton != null) {
                     skeleton.refreshPositionAndAngles(x, y, z, random.nextFloat() * 360f, 0f);
                     ItemStack bow = new ItemStack(Items.BOW);
-                    bow.addEnchantment(Enchantments.POWER, 2);
-                    bow.addEnchantment(Enchantments.PUNCH, 1);
+                    var enchantmentRegistry = world.getRegistryManager().getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+                    bow.addEnchantment(enchantmentRegistry.getOrThrow(Enchantments.POWER), 2);
+                    bow.addEnchantment(enchantmentRegistry.getOrThrow(Enchantments.PUNCH), 1);
                     skeleton.equipStack(EquipmentSlot.MAINHAND, bow);
                     skeleton.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.CHAINMAIL_HELMET));
                     world.spawnEntity(skeleton);

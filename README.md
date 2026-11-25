@@ -1,10 +1,10 @@
 # 🍀 Lucky Clover Reborn
 
-![Minecraft Version](https://img.shields.io/badge/Minecraft-1.20.1-brightgreen.svg)
-![Mod Loaders](https://img.shields.io/badge/Mod_Loaders-Forge_%7C_NeoForge_%7C_Fabric-orange.svg)
+![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.1-brightgreen.svg)
+![Mod Loaders](https://img.shields.io/badge/Mod_Loaders-NeoForge_%7C_Fabric-orange.svg)
 ![Dependencies](https://img.shields.io/badge/Dependencies-None_(Standalone)-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Java](https://img.shields.io/badge/Java-17-red.svg)
+![Java](https://img.shields.io/badge/Java-21-red.svg)
 
 **Lucky Clover Reborn** is a modern reimagining of the classic *Magic Clover* mod popularized during the golden age of Minecraft YouTube challenges (*Lucky Boss Challenges*).
 
@@ -114,11 +114,12 @@ To build the mod from source, clone the repository and run Gradle:
 ```bash
 git clone https://github.com/GabehEPW/Lucky-Clover-Reborn.git
 cd Lucky-Clover-Reborn
-./gradlew :forge:build
+./gradlew build
 ```
 
-The compiled standalone `.jar` will be generated in:  
-`forge/build/libs/lucky_clover_reborn-forge-1.20.1-1.0.0.jar`
+The compiled standalone `.jar` files will be generated in:  
+- `neoforge/build/libs/lucky_clover_reborn-neoforge-1.21.1-1.1.0.jar`  
+- `fabric/build/libs/lucky_clover_reborn-fabric-1.21.1-1.1.0.jar`
 
 ---
 
