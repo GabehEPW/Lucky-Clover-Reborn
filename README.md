@@ -35,7 +35,7 @@ Break wild grass in survival to discover the legendary four-leaf clover, then ri
 
 | Minecraft | Mod Version | Loaders | Java | Branch |
 | :--- | :--- | :--- | :--- | :--- |
-| **1.21.1** | `1.1.0` | NeoForge, Fabric | Java 21 | [`main`](https://github.com/GabehEPW/Lucky-Clover-Reborn/tree/main) |
+| **1.21.1** | `1.2.0` | NeoForge, Fabric | Java 21 | [`main`](https://github.com/GabehEPW/Lucky-Clover-Reborn/tree/main) |
 | **1.20.1** | `1.0.0` | Forge, Fabric | Java 17 | [`1.20.1`](https://github.com/GabehEPW/Lucky-Clover-Reborn/tree/1.20.1) |
 
 ---
@@ -127,8 +127,8 @@ cd Lucky-Clover-Reborn
 ```
 
 The compiled standalone `.jar` files will be generated in:  
-- `neoforge/build/libs/lucky_clover_reborn-neoforge-1.21.1-1.1.0.jar`  
-- `fabric/build/libs/lucky_clover_reborn-fabric-1.21.1-1.1.0.jar`
+- `neoforge/build/libs/lucky_clover_reborn-neoforge-1.21.1-1.2.0.jar`  
+- `fabric/build/libs/lucky_clover_reborn-fabric-1.21.1-1.2.0.jar`
 
 ---
 

@@ -1,5 +1,6 @@
 package net.luckyclover.item;
 
+import net.luckyclover.api.LuckyCloverEvents;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -120,17 +121,28 @@ public class LuckyCloverItem extends Item {
     }
 
     private void triggerCloverEffect(ServerWorld world, Vec3d spawnVec, BlockPos spawnPos, PlayerEntity player, Vec3d look, Random random) {
+        LuckyCloverEvents.CloverContext context = new LuckyCloverEvents.CloverContext(
+                world, spawnVec, spawnPos, player, look, random
+        );
+
+        if (LuckyCloverEvents.fireBeforeRoll(context)) {
+            return;
+        }
+
         double badLuckChance = badLuckChanceSupplier.getAsDouble();
 
         if (random.nextDouble() < badLuckChance) {
-            triggerBadLuck(world, spawnPos, player, random);
+            if (!LuckyCloverEvents.fireBadLuck(context)) {
+                triggerBadLuck(world, spawnPos, player, random);
+            }
         } else {
             spawnLuckyEffects(world, spawnVec);
-            dropRandomRegisteredItem(world, spawnVec, look, random);
+            ItemStack dropped = dropRandomRegisteredItem(world, spawnVec, look, random);
+            LuckyCloverEvents.fireAfterItemDrop(context, dropped);
         }
     }
 
-    private void spawnLuckyEffects(ServerWorld world, Vec3d pos) {
+    public static void spawnLuckyEffects(ServerWorld world, Vec3d pos) {
         world.playSound(null, pos.x, pos.y, pos.z, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 0.35f, 1.3f);
         world.spawnParticles(ParticleTypes.HAPPY_VILLAGER, pos.x, pos.y + 0.1, pos.z, 4, 0.2, 0.2, 0.2, 0.02);
     }
@@ -139,7 +151,7 @@ public class LuckyCloverItem extends Item {
      * Randomly rolls from ALL registered item IDs in Minecraft vanilla + all installed mods.
      * Features robust try/catch validation to guarantee broken mod items never crash the game.
      */
-    private void dropRandomRegisteredItem(ServerWorld world, Vec3d spawnVec, Vec3d look, Random random) {
+    private ItemStack dropRandomRegisteredItem(ServerWorld world, Vec3d spawnVec, Vec3d look, Random random) {
         Set<String> blacklist = new HashSet<>(blacklistSupplier.get());
 
         List<Item> allItems = new ArrayList<>(Registries.ITEM.stream()
@@ -151,8 +163,9 @@ public class LuckyCloverItem extends Item {
                 .toList());
 
         if (allItems.isEmpty()) {
-            dropItem(world, spawnVec, look, new ItemStack(Items.DIRT));
-            return;
+            ItemStack fallback = new ItemStack(Items.DIRT);
+            dropItem(world, spawnVec, look, fallback);
+            return fallback;
         }
 
         int maxStack = Math.max(1, maxStackSupplier.getAsInt());
@@ -181,6 +194,7 @@ public class LuckyCloverItem extends Item {
         }
 
         dropItem(world, spawnVec, look, resultStack);
+        return resultStack;
     }
 
     /**
@@ -276,7 +290,7 @@ public class LuckyCloverItem extends Item {
         return enableZombieSupplier.getAsBoolean();
     }
 
-    private void dropItem(ServerWorld world, Vec3d spawnVec, Vec3d look, ItemStack stack) {
+    public static void dropItem(ServerWorld world, Vec3d spawnVec, Vec3d look, ItemStack stack) {
         ItemEntity entity = new ItemEntity(world, spawnVec.x, spawnVec.y, spawnVec.z, stack);
         entity.setToDefaultPickupDelay();
         entity.setVelocity(look.x * 0.15, 0.25, look.z * 0.15);
